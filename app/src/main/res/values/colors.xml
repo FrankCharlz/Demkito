@@ -2,12 +2,15 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#71a9f7</color>
+    <color name="colorAccent">#2f7af2</color>
 
     <color name="blue">#f72f7af2</color>
     <color name="blue.alpha.stroke">#322f7af2</color>
 
     <color name="play.pause">#dbe1e9</color>
+
+    <color name="red">#33fdabb9</color>
+    <color name="green">#22b0c0fc</color>
 
 
 </resources>

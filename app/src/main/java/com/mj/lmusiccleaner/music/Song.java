@@ -1,6 +1,7 @@
 package com.mj.lmusiccleaner.music;
 
 import android.content.Context;
+import android.os.Environment;
 
 import com.mj.lmusiccleaner.cheapgoogle.CheapMP3;
 import com.mj.lmusiccleaner.utils.Paths;
@@ -41,7 +42,7 @@ public class Song {
         this.context = context;
         this.cheap_mp3 = new CheapMP3();
         this.song_file = infile;
-        this.clean_song_file = Utils.getOurDirectory(Paths.FOLDER_NAME);
+        this.clean_song_file = new File(Utils.getOurDirectory(Paths.FOLDER_NAME).getPath()+"_"+infile.getName());
     }
 
     public int getCutFrame() {
@@ -135,5 +136,17 @@ public class Song {
             }
         }
         return index;
+    }
+
+    public int getNumOfFrames() {
+        return cheap_mp3.getNumFrames();
+    }
+
+    public int getCutSecond() {
+        return (int) (getCutFrame() * 26.12f);
+    }
+
+    public File getCleanFile() {
+        return clean_song_file;
     }
 }

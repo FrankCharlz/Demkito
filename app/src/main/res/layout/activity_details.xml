@@ -4,12 +4,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/activity_horizontal_margin"
     tools:context="com.mj.lmusiccleaner.DetailsActivity">
 
 
     <com.mj.lmusiccleaner.utils.DopeTextView
         android:id="@+id/tv_song_details"
+        android:padding="@dimen/activity_horizontal_margin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="left"
@@ -18,10 +18,12 @@
         android:layout_alignParentTop="true"/>
 
     <LinearLayout
+        android:id="@+id/player_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_below="@id/tv_song_details"
+        android:padding="@dimen/btn.shadow.radius"
         android:layout_alignParentLeft="true">
 
         <at.markushi.ui.CircleButton
@@ -41,7 +43,19 @@
             android:layout_gravity="center_vertical"
            />
 
+
     </LinearLayout>
+
+    <com.mj.lmusiccleaner.utils.DopeTextView
+        android:layout_below="@id/player_container"
+        android:background="@color/green"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/btnRemoveAds"
+        android:padding="12dp"
+        android:layout_margin="12dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/remove_ads"/>
 
 
 
