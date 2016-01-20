@@ -2,5 +2,6 @@
     <string name="app_name">L Music Clean</string>
     <string name="click_to_open">click above to open a file</string>
     <string name="remove_ads">  REMOVE ADS  </string>
+    <string name="ads_removed_message">All ads have been removed.</string>
 
 </resources>

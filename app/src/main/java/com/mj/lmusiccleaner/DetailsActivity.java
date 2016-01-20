@@ -9,6 +9,7 @@ import com.mj.lmusiccleaner.music.Player;
 import com.mj.lmusiccleaner.music.Song;
 import com.mj.lmusiccleaner.utils.DopeTextView;
 import com.mj.lmusiccleaner.utils.Utils;
+import com.mj.lmusiccleaner.utils.Prefs;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.NotSupportedException;
 import com.mpatric.mp3agic.UnsupportedTagException;
@@ -35,12 +36,9 @@ public class DetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_details);
         initViews();
 
+        String path = getIntent().getStringExtra(MainActivity.PATH_TO_DETAILS);
 
-        Toast.makeText(this, "Details activity", Toast.LENGTH_SHORT).show();
-
-        //String path = getIntent().getStringExtra(MainActivity.PATH_TO_DETAILS);
-
-        String path = "/storage/sdcard0/Music/test3.mp3";
+        //String path = "/storage/sdcard0/Music/test3.mp3";
 
         original_file = new File(path);
         Utils.log(original_file.getAbsolutePath());
@@ -59,7 +57,6 @@ public class DetailsActivity extends AppCompatActivity {
         player.setCutAtSecond(song.getCutSecond());
 
         tvDetails.setText(details);
-        Toast.makeText(this, details, Toast.LENGTH_SHORT).show();
 
 
     }
@@ -78,19 +75,22 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     private void removeAds() {
-        if (player != null) {
-            player.kill();
-        }
 
         try {
+            player.kill();
+
             song.clean();
 
             File clean_file = song.getCleanFile();
             player.setSong(clean_file);
             player.setCutAtSecond(0);
-            player.refresh();
 
-            //player.setCutAtSecond(Integer.MAX_VALUE);
+            float uchafu = (original_file.length() - clean_file.length())*1.0f/1024/1024;
+            Prefs.incrementCleanedBytes(this, uchafu);
+            Prefs.incrementCleanedSongs(this);
+
+            tvDetails.setText(R.string.ads_removed_message);
+
 
         } catch (Exception e) {
             Utils.log("An error occured could not remove ads.");

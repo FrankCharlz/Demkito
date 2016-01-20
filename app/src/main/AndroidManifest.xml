@@ -20,7 +20,7 @@
 
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
-                <category android:name="android.intent.category.DEFAULT />
+                <category android:name="android.intent.category.DEFAULT"/>
                 <data android:mimeType="audio/*" />
             </intent-filter>
 
@@ -29,7 +29,6 @@
         <activity android:name=".DetailsActivity"/>
 
 
-        </activity>
 
     </application>
 

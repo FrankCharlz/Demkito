@@ -57,10 +57,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void doStats() {
         int cleanedSongs = Prefs.getCleanedSongs(this);
-        int cleanedBytes = Prefs.getCleanedBytes(this);
+        float cleanedBytes = Prefs.getCleanedBytes(this);
 
-        float megabytes = cleanedBytes/1024.0f/1024.0f;
-        String megabytes_str = String.format("%.1f", megabytes);
+        String megabytes_str = String.format("%.1f", cleanedBytes);
 
         SpannableString statsSongs = new SpannableString(cleanedSongs +  "songs\ncleaned");
         SpannableString statsBytes = new SpannableString(megabytes_str +"MB\nads dumped");
@@ -119,5 +118,11 @@ public class MainActivity extends AppCompatActivity {
         toDetailsIntent.putExtra(MainActivity.PATH_TO_DETAILS, path);
         startActivity(toDetailsIntent);
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        doStats();
     }
 }

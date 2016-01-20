@@ -48,7 +48,7 @@
 
     <com.mj.lmusiccleaner.utils.DopeTextView
         android:layout_below="@id/player_container"
-        android:background="@color/green"
+        android:background="@color/play.pause"
         android:layout_centerHorizontal="true"
         android:id="@+id/btnRemoveAds"
         android:padding="12dp"

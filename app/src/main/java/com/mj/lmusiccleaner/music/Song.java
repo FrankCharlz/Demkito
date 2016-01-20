@@ -5,6 +5,7 @@ import android.os.Environment;
 
 import com.mj.lmusiccleaner.cheapgoogle.CheapMP3;
 import com.mj.lmusiccleaner.utils.Paths;
+import com.mj.lmusiccleaner.utils.Prefs;
 import com.mj.lmusiccleaner.utils.Utils;
 import com.mpatric.mp3agic.ID3v1;
 import com.mpatric.mp3agic.ID3v2;

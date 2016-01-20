@@ -19,9 +19,7 @@ import java.io.File;
 
 import at.markushi.ui.CircleButton;
 
-public class Player implements
-        View.OnTouchListener,
-        MediaPlayer.OnCompletionListener{
+public class Player implements View.OnTouchListener,  MediaPlayer.OnCompletionListener{
 
     private static final int SEEK_BAR_X_SCALE = 5;
     private static final long THREAD_LOOP_SECONDS = 200;
@@ -108,13 +106,14 @@ public class Player implements
         if (!mediaPlayer.isPlaying()) {
             mediaPlayer.start();
             btnPlayPause.setImageDrawable(pauseDrawable);
+            seekBarPrimaryProgressUpdate();
 
         } else {
             mediaPlayer.pause();
             btnPlayPause.setImageDrawable(playDrawable);
+            handler.removeCallbacks(progressRunnable);
         }
 
-        seekBarPrimaryProgressUpdate();
     }
 
     private void seekBarPrimaryProgressUpdate() {
@@ -168,19 +167,18 @@ public class Player implements
 
     public void kill() {
         handler.removeCallbacks(progressRunnable); //stopping the thread...
+
         if (mediaPlayer.isPlaying()) {
-            seekBar.setProgress(0);
             mediaPlayer.pause();
-            mediaPlayer.stop();
-            mediaPlayer.release();
         }
+        mediaPlayer.stop();
+        mediaPlayer.reset();
+        seekBar.setProgress(0);
     }
 
     public void setCutAtSecond(int cutAtSecond) {
         this.cutAtSecond = cutAtSecond;
     }
 
-    public void refresh() {
-        //does nothing..
-    }
+
 }

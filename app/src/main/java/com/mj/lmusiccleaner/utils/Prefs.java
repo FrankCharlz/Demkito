@@ -7,10 +7,12 @@ import com.mj.lmusiccleaner.MainActivity;
 
 /**
  * Created by Frank on 1/19/2016.
+ *
+ * -
  */
 public class Prefs {
 
-    private static final String PREFS_FILE = "your_data";
+    private static final String PREFS_FILE = "j68hGH";
     private static final String CLEANED_SONGS = "n7jbn";
     private static final String CLEANED_BYTES = "7jF0";
 
@@ -25,14 +27,15 @@ public class Prefs {
         preferences.edit().putInt(CLEANED_SONGS, cn + 1).apply();
     }
 
-    public static int getCleanedBytes(Context context) {
+    public static float getCleanedBytes(Context context) {
         SharedPreferences preferences = context.getSharedPreferences(PREFS_FILE, Context.MODE_PRIVATE);
-        return preferences.getInt(CLEANED_BYTES, 0);
+        return preferences.getFloat(CLEANED_BYTES, 0);
     }
 
-    public static void incrementCleanedBytes(Context context) {
+    public static void incrementCleanedBytes(Context context, float mb) {
         SharedPreferences preferences = context.getSharedPreferences(PREFS_FILE, Context.MODE_PRIVATE);
         int cn = preferences.getInt(CLEANED_BYTES, 0);
-        preferences.edit().putInt(CLEANED_BYTES, cn + 1).apply();
+        preferences.edit().putFloat(CLEANED_BYTES, cn + mb).apply();
+        //store in KILOBYTES
     }
 }

@@ -17,7 +17,7 @@ import com.mj.lmusiccleaner.MainActivity;
 public class Paths {
 
 
-    public static final String FOLDER_NAME = "Demkito/";
+    public static final String FOLDER_NAME = "L Music Cleaner/";
 
     public static String getPathFromMediaStoreQuery(Context context, Uri uri) {
         Utils.log("Finding path MEDIA QUERY METHOD");
@@ -25,6 +25,7 @@ public class Paths {
         try {
             String[] projections = {MediaStore.Audio.Media.DATA};
             cursor = context.getContentResolver().query(uri, projections, null, null, null);
+            assert cursor != null;
             int index = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA);
             cursor.moveToFirst();
             return cursor.getString(index);
