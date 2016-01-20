@@ -3,26 +3,84 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.mj.lmusiccleaner.MainActivity">
 
     <ImageView
-        android:id="@+id/imgv_add"
-        android:layout_width="184dp"
+        android:id="@+id/mymenu"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:padding="@dimen/activity_horizontal_margin"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_action_more_vert"
+        android:padding="6dp"/>
+
+    <at.markushi.ui.CircleButton
+        android:id="@+id/imgv_add"
+        android:layout_width="@dimen/btn.radius"
+        android:layout_height="@dimen/btn.radius"
+        app:cb_pressedRingWidth="@dimen/btn.shadow.radius"
+        app:cb_color="@color/blue"
         android:layout_margin="@dimen/activity_horizontal_margin"
         android:layout_centerInParent="true"
-        android:src="@drawable/ic_action_add"/>
+        android:src="@drawable/ic_action_add"
+        android:layout_below="@id/mymenu"
+        />
 
-    <TextView
+
+    <com.mj.lmusiccleaner.utils.DopeTextView
+        android:id="@+id/tv_ins"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/imgv_add"
         android:layout_centerHorizontal="true"
-        android:text="Click above to select a file" />
+        android:text="@string/click_to_open"
+        android:gravity="center"/>
+
+
+    <LinearLayout
+        android:id="@+id/stats"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true">
+
+
+        <com.mj.lmusiccleaner.utils.DopeTextView
+            android:id="@+id/tv_stats_songs"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:gravity="center"
+            android:text=" 12 \nsongs\ncleaned"
+            />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/blue.alpha.stroke"/>
+
+        <com.mj.lmusiccleaner.utils.DopeTextView
+            android:id="@+id/tv_stats_bytes"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:gravity="center"
+            android:text=" 129 \nkbs\nremoved"
+            />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/separetor_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/blue.alpha.stroke"
+        android:layout_above="@id/stats"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        />
+
 </RelativeLayout>

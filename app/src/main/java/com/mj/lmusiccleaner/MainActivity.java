@@ -3,11 +3,18 @@ package com.mj.lmusiccleaner;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.RelativeSizeSpan;
+import android.text.style.StyleSpan;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mj.lmusiccleaner.utils.Paths;
+import com.mj.lmusiccleaner.utils.Prefs;
 import com.mj.lmusiccleaner.utils.Utils;
 
 import java.io.File;
@@ -15,13 +22,25 @@ import java.io.File;
 public class MainActivity extends AppCompatActivity {
 
     private static final int RQ_CODE = 2;
+    public static final String PATH_TO_DETAILS = "8HJk";
     private ImageView btnAdd;
+    private TextView tvIns, tvSongs, tvBytes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         initViews();
+        doStats();
+
+        String instructions = "click the button above<br/>" +
+                "&mdash;OR&mdash;<br/>" +
+                "<b>browse</b> to the song <b>click share</b><br/>"+
+                "then select <b>L Music Cleaner</b>";
+
+        tvIns.setText(Html.fromHtml(instructions));
+
 
         final Intent intent = getIntent();
         if (intent.getAction().contains("MAIN")) {
@@ -36,7 +55,30 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void doStats() {
+        int cleanedSongs = Prefs.getCleanedSongs(this);
+        int cleanedBytes = Prefs.getCleanedBytes(this);
+
+        float megabytes = cleanedBytes/1024.0f/1024.0f;
+        String megabytes_str = String.format("%.1f", megabytes);
+
+        SpannableString statsSongs = new SpannableString(cleanedSongs +  "songs\ncleaned");
+        SpannableString statsBytes = new SpannableString(megabytes_str +"MB\nads dumped");
+
+        RelativeSizeSpan big_style = new RelativeSizeSpan(3.6f);
+
+        statsSongs.setSpan(big_style, 0, (""+cleanedSongs).length(), 0);
+        statsBytes.setSpan(big_style, 0, (""+megabytes_str).length(), 0);
+
+        tvSongs.setText(statsSongs);
+        tvBytes.setText(statsBytes);
+    }
+
     private void initViews() {
+        tvSongs = (TextView) findViewById(R.id.tv_stats_songs);
+        tvBytes = (TextView) findViewById(R.id.tv_stats_bytes);
+        tvIns = (TextView) findViewById(R.id.tv_ins);
+
         btnAdd =(ImageView)findViewById(R.id.imgv_add);
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,13 +114,10 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        File file = new File(path);
-        Utils.log(file.getAbsolutePath());
-
-        Song song = new Song(this, file);
-        song.solve();
-        Utils.log("soluble : "+song.isItSoluble()+"\ncut frame : "+song.getCutFrame());
-
+        //proceed to start DetailsActivity
+        Intent toDetailsIntent = new Intent(this, DetailsActivity.class);
+        toDetailsIntent.putExtra(MainActivity.PATH_TO_DETAILS, path);
+        startActivity(toDetailsIntent);
 
     }
 }

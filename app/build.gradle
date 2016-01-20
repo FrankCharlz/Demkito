@@ -25,4 +25,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.1.1'
 
     compile files('libs/mp3agic-0.8.1.jar')
+    compile 'com.github.markushi:circlebutton:1.1'
 }

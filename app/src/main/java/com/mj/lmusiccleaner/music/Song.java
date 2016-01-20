@@ -1,4 +1,4 @@
-package com.mj.lmusiccleaner;
+package com.mj.lmusiccleaner.music;
 
 import android.content.Context;
 

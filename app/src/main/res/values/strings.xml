@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">L Music Clean</string>
+    <string name="click_to_open">click above to open a file</string>
+
 </resources>
