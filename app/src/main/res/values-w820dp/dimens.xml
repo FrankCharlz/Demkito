@@ -8,6 +8,9 @@
     <dimen name="padding.stats">96dp</dimen>
 
     <dimen name="btn.radius">264dp</dimen>
-    <dimen name="btn.shadow.radius">17dp</dimen>
+    <dimen name="btn.shadow.radius">32dp</dimen>
+
+    <dimen name="btn.margin.top">56dp</dimen>
+    <dimen name="btn.margin.bottom">24dp</dimen>
 
 </resources>

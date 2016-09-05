@@ -34,8 +34,8 @@ public class Prefs {
 
     public static void incrementCleanedBytes(Context context, float mb) {
         SharedPreferences preferences = context.getSharedPreferences(PREFS_FILE, Context.MODE_PRIVATE);
-        int cn = preferences.getInt(CLEANED_BYTES, 0);
+        float cn = preferences.getFloat(CLEANED_BYTES, 0);
         preferences.edit().putFloat(CLEANED_BYTES, cn + mb).apply();
-        //store in KILOBYTES
+        //store in MEGABYTES
     }
 }

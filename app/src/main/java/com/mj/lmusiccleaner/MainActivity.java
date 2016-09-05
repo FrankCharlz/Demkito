@@ -4,10 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
-import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.RelativeSizeSpan;
-import android.text.style.StyleSpan;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,12 +15,10 @@ import com.mj.lmusiccleaner.utils.Paths;
 import com.mj.lmusiccleaner.utils.Prefs;
 import com.mj.lmusiccleaner.utils.Utils;
 
-import java.io.File;
-
 public class MainActivity extends AppCompatActivity {
 
     private static final int RQ_CODE = 2;
-    public static final String PATH_TO_DETAILS = "8HJk";
+    public static final String TO_DETAILS = "8HJk";
     private ImageView btnAdd;
     private TextView tvIns, tvSongs, tvBytes;
 
@@ -34,10 +30,12 @@ public class MainActivity extends AppCompatActivity {
         initViews();
         doStats();
 
-        String instructions = "click the button above<br/>" +
+        String appname = getResources().getString(R.string.app_name);
+
+        String instructions = "click the + button above<br/>" +
                 "&mdash;OR&mdash;<br/>" +
-                "<b>browse</b> to the song <b>click share</b><br/>"+
-                "then select <b>L Music Cleaner</b>";
+                "<b>browse</b> your <b>file manager</b> for the song, <b>click share</b>"+
+                " then select <b><u>"+appname+"</u></b>";
 
         tvIns.setText(Html.fromHtml(instructions));
 
@@ -105,24 +103,35 @@ public class MainActivity extends AppCompatActivity {
         String path = Paths.getPath(this, intent);
         if (path == null) {
             Utils.log("Couldn't find path, process terminating");
+            toast("Sorry, we couldn\'t process the selected file");
             return;
         }
 
         if (!path.endsWith("mp3")) {
             Utils.log("Not an mp3 file");
+            toast("Sorry, the selected file is not an mp3 file.");
             return;
         }
 
         //proceed to start DetailsActivity
         Intent toDetailsIntent = new Intent(this, DetailsActivity.class);
-        toDetailsIntent.putExtra(MainActivity.PATH_TO_DETAILS, path);
+        toDetailsIntent.putExtra(MainActivity.TO_DETAILS, path);
         startActivity(toDetailsIntent);
 
+    }
+
+    private void toast(String str) {
+        Toast.makeText(this, str, Toast.LENGTH_LONG).show();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         doStats();
+    }
+
+    public void openCleanedSongsActivity(View view) {
+        Toast.makeText(this, "Still working on something, coming in full package soon!", Toast.LENGTH_LONG).show();
+        //startActivity(new Intent(this, ListCleanedSongsActvity.class));
     }
 }

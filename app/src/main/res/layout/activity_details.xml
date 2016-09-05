@@ -6,16 +6,35 @@
     android:layout_height="match_parent"
     tools:context="com.mj.lmusiccleaner.DetailsActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:layout_alignParentTop="true" >
+
+        <com.mj.lmusiccleaner.utils.DopeTextView
+            android:padding="@dimen/activity_horizontal_margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Song Details"
+            android:textColor="#ffffff"
+            android:gravity="start"
+            android:textSize="18sp"/>
+
+    </android.support.v7.widget.Toolbar>
+
+
 
     <com.mj.lmusiccleaner.utils.DopeTextView
+        android:layout_below="@id/toolbar"
         android:id="@+id/tv_song_details"
         android:padding="@dimen/activity_horizontal_margin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="left"
         android:text="Hello bed !"
-        android:textSize="18sp"
-        android:layout_alignParentTop="true"/>
+        android:textSize="18sp"/>
 
     <LinearLayout
         android:id="@+id/player_container"
@@ -41,7 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-           />
+            />
 
 
     </LinearLayout>

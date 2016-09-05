@@ -1,7 +1,8 @@
 <resources>
-    <string name="app_name">L Music Clean</string>
-    <string name="click_to_open">click above to open a file</string>
+    <string name="app_name">Demkito</string>
+    <string name="click_to_open">click above to open a file click above to open a file click above to open a file click </string>
     <string name="remove_ads">  REMOVE ADS  </string>
-    <string name="ads_removed_message">All ads have been removed.</string>
+    <string name="ads_removed_message">Congrats...\nAll ads have been removed.</string>
+    <string name="ads_removing_failed_message">Sorry, ads could not be removed due to unresolved complications</string>
 
 </resources>

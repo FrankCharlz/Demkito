@@ -22,6 +22,6 @@ public class Utils {
     }
 
     public static void log(String str) {
-        Log.e("--007m", str);
+        Log.e("007m", str);
     }
 }

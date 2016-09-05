@@ -1,21 +1,21 @@
 package com.mj.lmusiccleaner;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Toast;
 
 import com.mj.lmusiccleaner.music.Player;
 import com.mj.lmusiccleaner.music.Song;
 import com.mj.lmusiccleaner.utils.DopeTextView;
 import com.mj.lmusiccleaner.utils.Utils;
 import com.mj.lmusiccleaner.utils.Prefs;
-import com.mpatric.mp3agic.InvalidDataException;
-import com.mpatric.mp3agic.NotSupportedException;
-import com.mpatric.mp3agic.UnsupportedTagException;
 
+import java.io.BufferedWriter;
 import java.io.File;
-import java.io.IOException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.OutputStreamWriter;
 
 /**
  * Created by Frank on 1/19/2016.
@@ -36,7 +36,7 @@ public class DetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_details);
         initViews();
 
-        String path = getIntent().getStringExtra(MainActivity.PATH_TO_DETAILS);
+        String path = getIntent().getStringExtra(MainActivity.TO_DETAILS);
 
         //String path = "/storage/sdcard0/Music/test3.mp3";
 
@@ -48,8 +48,7 @@ public class DetailsActivity extends AppCompatActivity {
         Utils.log("soluble : " + song.isItSoluble() + "\ncut frame : " + song.getCutFrame());
 
         String details = "Song name : "+original_file.getName().substring(0, original_file.getName().length() - 4) +
-                "\nCut point : "+ song.getCutFrame() +
-                "\nCut second : "+ String.format("%.2f", song.getCutSecond()*1.0f/1000) +
+                "\nDirty seconds : "+ String.format("%.2f", song.getCutSecond()*1.0f/1000) +
                 "\n\n";
 
         player = new Player(this);
@@ -85,20 +84,32 @@ public class DetailsActivity extends AppCompatActivity {
             player.setSong(clean_file);
             player.setCutAtSecond(0);
 
-            float uchafu = (original_file.length() - clean_file.length())*1.0f/1024/1024;
+            float uchafu = original_file.length() - clean_file.length(); //bytes
+            uchafu = uchafu / 1024.0f / 1024.0f;
+
             Prefs.incrementCleanedBytes(this, uchafu);
             Prefs.incrementCleanedSongs(this);
 
             tvDetails.setText(R.string.ads_removed_message);
+            btnRemoveAds.setVisibility(View.GONE);
 
+            FileOutputStream fos = openFileOutput("_cleaned_songs_db_", Context.MODE_APPEND);
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
+            bw.write(clean_file.getAbsolutePath().trim());
+            bw.newLine();
+            bw.flush();
+            bw.close();
 
         } catch (Exception e) {
+            //// TODO: 5/22/2016 laminate this...
             Utils.log("An error occured could not remove ads.");
             Utils.log(e.getLocalizedMessage());
             e.printStackTrace();
 
             player.setSong(original_file);
             player.setCutAtSecond(song.getCutSecond());
+
+            tvDetails.setText(R.string.ads_removing_failed_message);
 
         }
     }
