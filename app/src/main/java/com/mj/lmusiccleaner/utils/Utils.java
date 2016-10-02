@@ -12,8 +12,7 @@ import java.io.File;
  */
 public class Utils {
 
-    public static File getOurDirectory(String folder_name) {
-        // Get the directory for the user's public pictures directory.
+    public static File getAppDirectory(String folder_name) {
         File file = new File(Environment.getExternalStorageDirectory(), folder_name);
         if (!file.mkdirs()) {
             Utils.log("Directory not created, maybe it exists");

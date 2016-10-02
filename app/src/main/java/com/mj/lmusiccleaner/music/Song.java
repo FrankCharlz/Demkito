@@ -1,12 +1,9 @@
 package com.mj.lmusiccleaner.music;
 
 import android.content.Context;
-import android.graphics.Path;
-import android.os.Environment;
 
 import com.mj.lmusiccleaner.cheapgoogle.CheapMP3;
 import com.mj.lmusiccleaner.utils.Paths;
-import com.mj.lmusiccleaner.utils.Prefs;
 import com.mj.lmusiccleaner.utils.Utils;
 import com.mpatric.mp3agic.ID3v1;
 import com.mpatric.mp3agic.ID3v2;
@@ -44,7 +41,7 @@ public class Song {
         this.context = context;
         this.cheap_mp3 = new CheapMP3();
         this.song_file = infile;
-        File directory = Utils.getOurDirectory(Paths.FOLDER_NAME);
+        File directory = Utils.getAppDirectory(Paths.FOLDER_NAME);
         this.clean_song_file = new File(directory, infile.getName());
 
         Utils.log("clean file path to be : "+clean_song_file.getAbsolutePath());

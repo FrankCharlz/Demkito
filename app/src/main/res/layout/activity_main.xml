@@ -25,7 +25,8 @@
             android:layout_alignParentEnd="true"
             android:src="@drawable/ic_action_menu"
             android:onClick="openCleanedSongsActivity"
-            android:padding="6dp"/>
+            android:padding="6dp"
+            tools:ignore="ContentDescription" />
 
         <at.markushi.ui.CircleButton
             android:id="@+id/imgv_add"

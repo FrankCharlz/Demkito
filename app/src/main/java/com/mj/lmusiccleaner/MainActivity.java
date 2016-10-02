@@ -1,5 +1,6 @@
 package com.mj.lmusiccleaner;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,10 +23,14 @@ public class MainActivity extends AppCompatActivity {
     private ImageView btnAdd;
     private TextView tvIns, tvSongs, tvBytes;
 
+    private Context mContext;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mContext = this;
 
         initViews();
         doStats();
@@ -84,6 +89,14 @@ public class MainActivity extends AppCompatActivity {
                 intent.addCategory(Intent.CATEGORY_OPENABLE);
                 intent.setType("audio/*");
                 startActivityForResult(intent, RQ_CODE);
+            }
+        });
+
+        tvSongs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, ListCleanedSongsActvity.class);
+                mContext.startActivity(intent);
             }
         });
 
