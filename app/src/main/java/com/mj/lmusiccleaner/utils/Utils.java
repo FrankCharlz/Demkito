@@ -12,8 +12,10 @@ import java.io.File;
  */
 public class Utils {
 
-    public static File getAppDirectory(String folder_name) {
-        File file = new File(Environment.getExternalStorageDirectory(), folder_name);
+    private static final String APP_FOLDER_NAME = "demkito";
+
+    public static File getAppDirectory() {
+        File file = new File(Environment.getExternalStorageDirectory(), APP_FOLDER_NAME);
         if (!file.mkdirs()) {
             Utils.log("Directory not created, maybe it exists");
         }
@@ -21,6 +23,6 @@ public class Utils {
     }
 
     public static void log(String str) {
-        Log.e("007m", str);
+        Log.e("demkito", str);
     }
 }

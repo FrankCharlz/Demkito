@@ -16,6 +16,8 @@ import com.mj.lmusiccleaner.utils.Paths;
 import com.mj.lmusiccleaner.utils.Prefs;
 import com.mj.lmusiccleaner.utils.Utils;
 
+import java.io.File;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final int RQ_CODE = 2;
@@ -31,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mContext = this;
+
+        syncHack();
 
         initViews();
         doStats();
@@ -147,4 +151,17 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this, "Still working on something, coming in full package soon!", Toast.LENGTH_LONG).show();
         //startActivity(new Intent(this, ListCleanedSongsActvity.class));
     }
+
+
+    private void syncHack() {
+        File f = Utils.getAppDirectory();
+        if (f.exists()) {
+            String[] fs = f.list();
+            if (fs != null) {
+                Prefs.setCleanedSongs(this, fs.length);
+            }
+        }
+
+    }
+
 }

@@ -41,7 +41,7 @@ public class Song {
         this.context = context;
         this.cheap_mp3 = new CheapMP3();
         this.song_file = infile;
-        File directory = Utils.getAppDirectory(Paths.FOLDER_NAME);
+        File directory = Utils.getAppDirectory();
         this.clean_song_file = new File(directory, infile.getName());
 
         Utils.log("clean file path to be : "+clean_song_file.getAbsolutePath());

@@ -38,4 +38,9 @@ public class Prefs {
         preferences.edit().putFloat(CLEANED_BYTES, cn + mb).apply();
         //store in MEGABYTES
     }
+
+    public static void setCleanedSongs(Context context, int cleanedSongs) {
+        SharedPreferences preferences = context.getSharedPreferences(PREFS_FILE, Context.MODE_PRIVATE);
+        preferences.edit().putInt(CLEANED_SONGS, cleanedSongs).apply();
+    }
 }

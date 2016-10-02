@@ -1,10 +1,8 @@
 package com.mj.lmusiccleaner;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.mj.lmusiccleaner.utils.Utils;
@@ -23,14 +21,17 @@ public class ListCleanedSongsActvity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_cleaned_songs);
 
-        File folder = Utils.getAppDirectory("demkito");
+        File folder = Utils.getAppDirectory();
         File[] files = folder.listFiles();
 
         String[] names = new String[files.length];
-
+        String name;
         for (int i = 0; i < files.length; i++) {
-            names[i] = files[i].getName();
+            name = files[i].getName();
+            if (name.length() > 4) name = name.substring(0, name.length() - 4);
+            names[i] = name;
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>
