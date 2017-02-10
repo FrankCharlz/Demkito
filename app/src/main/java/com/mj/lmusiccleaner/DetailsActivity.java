@@ -19,7 +19,6 @@ import java.io.OutputStreamWriter;
 
 /**
  * Created by Frank on 1/19/2016.
- *
  * In God we trust
  */
 public class DetailsActivity extends AppCompatActivity {

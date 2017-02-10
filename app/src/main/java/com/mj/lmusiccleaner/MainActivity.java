@@ -2,6 +2,9 @@ package com.mj.lmusiccleaner;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
+import android.support.customtabs.CustomTabsIntent;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
@@ -164,4 +167,15 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void search(View view) {
+        String search_term = "christian bella";
+        search_term.trim();
+        search_term.replaceAll(" ", "+");
+
+        String url = "https://mkito.com/search?s="+search_term;
+        CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+        builder.setToolbarColor(ContextCompat.getColor(this, R.color.colorPrimary));
+        CustomTabsIntent customTabsIntent = builder.build();
+        customTabsIntent.launchUrl(this, Uri.parse(url));
+    }
 }

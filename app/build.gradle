@@ -26,4 +26,5 @@ dependencies {
 
     compile files('libs/mp3agic-0.8.1.jar')
     compile 'com.github.markushi:circlebutton:1.1'
+    compile 'com.android.support:customtabs:23.3.0'
 }

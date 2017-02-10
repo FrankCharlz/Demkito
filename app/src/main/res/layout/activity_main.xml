@@ -28,6 +28,7 @@
             android:padding="6dp"
             tools:ignore="ContentDescription" />
 
+
         <at.markushi.ui.CircleButton
             android:id="@+id/imgv_add"
             android:layout_width="@dimen/btn.radius"
@@ -99,6 +100,20 @@
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             />
+
+        <ImageView
+            android:id="@+id/search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_search_24"
+            android:onClick="search"
+            android:padding="6dp"
+            tools:ignore="ContentDescription"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/mymenu"
+            android:layout_toStartOf="@+id/mymenu"
+            android:adjustViewBounds="true"
+            android:paddingTop="12dp" />
 
     </RelativeLayout>
 

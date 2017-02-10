@@ -1,7 +1,11 @@
 package com.mj.lmusiccleaner;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -24,7 +28,7 @@ public class ListCleanedSongsActvity extends AppCompatActivity {
         setContentView(R.layout.activity_cleaned_songs);
 
         File folder = Utils.getAppDirectory();
-        File[] files = folder.listFiles();
+        final File[] files = folder.listFiles();
 
         String[] names = new String[files.length];
         String name;
@@ -39,6 +43,15 @@ public class ListCleanedSongsActvity extends AppCompatActivity {
 
         mListView = (ListView) findViewById(R.id.lv_cleaned_songs);
         mListView.setAdapter(adapter);
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent();
+                intent.setAction(android.content.Intent.ACTION_VIEW);
+                intent.setDataAndType(Uri.fromFile(files[i]), "audio/*");
+                startActivity(intent);
+            }
+        });
 
 
 
